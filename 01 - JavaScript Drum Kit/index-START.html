@@ -60,6 +60,27 @@
 
 <script>
 
+  function playSound(event){
+    const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
+    if(!audio) return; // No audio to play
+    audio.currentTime = 0; // Reset clip 
+    audio.play();
+    
+    // Animate
+    key.classList.add("playing");
+  }
+  
+  function removeTransition(event){
+    if(event.propertyName != 'transform') return; // Skip events that are not transform
+    //console.log(event.propertyName);
+    this.classList.remove("playing");
+  };
+  
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  
+  window.addEventListener("keydown", playSound);
 </script>
 
 
