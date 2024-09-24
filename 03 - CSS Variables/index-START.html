@@ -19,10 +19,26 @@
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="https://images.pexels.com/photos/887845/pexels-photo-887845.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" >
+  <!-- <img src="pexels-danielbendig-887845.jpg" > -->
 
   <style>
 
+    :root{
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 5px;
+    }
+
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl{
+      color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -46,6 +62,27 @@
   </style>
 
   <script>
+    // query selector all will return a nodelist instead of array
+    // in __proto__ you can see the functions and fields they come with
+    // to see the differences in console/debugger between a nodelist and array
+    // var x = [1,2,3]
+    // x
+
+    // later, you will convert this to an array to access to other
+    // built-in fields and functions but for now it's not needed
+    const inputs = document.querySelectorAll(".controls input");
+    console.log(inputs);
+
+    function HandleUpdate(){
+      const suffix = this.dataset.sizing || "";
+      document.documentElement.style.setProperty(`--${this.name}`, this.value+suffix);
+      console.log(suffix, this.name);
+      // console.log(this.dataset);
+    }
+
+    inputs.forEach((input) =>{input.addEventListener("change", HandleUpdate)});
+    // inputs.forEach((input) =>{input.addEventListener("mousemove", HandleUpdate)});
+
   </script>
 
 </body>
