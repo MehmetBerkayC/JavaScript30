@@ -1,47 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
-  <link rel="icon" href="https://fav.farm/🔥" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Console Tricks!</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+    <script>
+      const dogs = [
+        { name: "Snickers", age: 2 },
+        { name: "hugo", age: 8 },
+      ];
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+      function makeGreen() {
+        const p = document.querySelector("p");
+        p.style.color = "#BADA55";
+        p.style.fontSize = "50px";
+      }
 
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
+      // Regular
+      console.log("Console text");
+      // Interpolated
+      console.log("Hello, i am a %s string!", '"variable here"');
+      // Styled
+      console.log(
+        "%c Here is some text",
+        "font-size:50px; background:red; text-shadow:10px 10px 0 blue"
+      );
+      // warning!
+      console.warn("Something bad is happenning");
+      // Error :|
+      console.error("Something REALLY bad is happenning");
 
-    // Regular
+      // Info
+      console.info("There is some info here");
+      // Testing
+      const p = document.querySelector("p");
+      console.assert(
+        p.classList.contains("ouch"),
+        'Cant find p with class "ouch"'
+      );
 
-    // Interpolated
+      console.assert(1 == 1, "That is wrong"); // only fires if the condition is false
+      // clearing
+      // console.clear();
 
-    // Styled
+      // Viewing DOM Elements
+      console.log(p); // only shows the element
+      console.dir(p); // gives info about the element
+      console.clear();
+      // Grouping together
+      dogs.forEach((dog) => {
+        console.group(`${dog.name}`);
+        // console.groupCollapsed(`${dog.name}`); // collapsed group by default
+        console.log(`This is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old`);
+        console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+        console.groupEnd(`${dog.name}`);
+      });
+      // counting
+      console.count("Wes");
+      console.count("Wes");
+      console.count("Hila");
+      console.count("Wes");
+      console.count("Wes");
+      console.count("Don");
+      console.count("Wes");
+      console.count("Don");
+      console.count("Wes");
+      // timing
+      console.time("fetching data");
+      fetch("https://api.github.com/users/MehmetBerkayC")
+        .then((data) => data.json())
+        .then((data) => {
+          console.timeEnd("fetching data");
+          console.log(data);
+        });
 
-    // warning!
-
-    // Error :|
-
-    // Info
-
-    // Testing
-
-    // clearing
-
-    // Viewing DOM Elements
-
-    // Grouping together
-
-    // counting
-
-    // timing
-
-  </script>
-</body>
+      // table
+      console.table(dogs);
+    </script>
+  </body>
 </html>
